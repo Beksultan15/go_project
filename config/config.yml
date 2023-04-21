@@ -1,0 +1,8 @@
+port: "8080"
+db: 
+  username: "docker"
+  password: "docker"
+  host: "postgres"
+  port: "5432"
+  dbname: "go"
+  sslmode: "disable"

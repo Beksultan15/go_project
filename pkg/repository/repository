@@ -1,0 +1,29 @@
+package repository
+
+import (
+	"github.com/Beksultan15/go_project"
+	"github.com/gin-gonic/gin"
+	"github.com/jmoiron/sqlx"
+)
+
+
+type Authorization interface {
+	CreateUser(user go_project.User) (int, error)
+	GetUser(username,password string) (go_project.User, error)
+}
+
+type Searching interface {
+	GetSearchingProduct(c *gin.Context) ([]go_project.Products, error)
+}
+
+type Repository struct {
+	Authorization
+	Searching
+}
+
+func NewRepository(db *sqlx.DB) *Repository {
+    return &Repository{
+		Authorization: NewAuthPostgres(db),
+		Searching: NewSearchPostgres(db),
+	}
+}
